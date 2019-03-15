@@ -62,13 +62,14 @@ def split(inputFileName,paresTiempoCancion,duracion):
         print('OK')
 
 def getPares(descripcion):
-    paresTiempoCancion = [list(filter(lambda a: a,x)) for x in findall('(?s)(?:(?P<artistSongPre>.*?)(?P<timeStampPost>(?:\d{1,2}:)?\d{1,2}:\d{1,2})(?=\n))|(?:(?P<timeStampPre>(?:\d{1,2}:)?\d{1,2}:\d{1,2})(?P<artistSongPost>.*?(?=\n)))',descripcion)]
+    paresTiempoCancion = [list(filter(lambda a: a,x)) for x in findall('(?s)(?:\n\d+[\*:#\.)-_]\s)(?:(.*?)((?:\d{1,2}:)?\d{1,2}:\d{1,2})(?:\s*)(?=\n))|(?:((?:\d{1,2}:)?\d{1,2}:\d{1,2})(.*?(?=\n)))',descripcion)]
+    #'(?s)(?:(.+?))(?:(?:[\(\[\s]+?)((?:\d{1,2}:)?\d{1,2}:\d{1,2})(?:.+?\d{1,2}:\d{1,2}.+?\n))'
     if not paresTiempoCancion: salir('Mmmm... no hay tracklist en la descripcion')
     paresTiempoCancion.reverse()
     return [[x.strip() for x in [i,j]] for i,j in paresTiempoCancion]
 
 def main():
-    if len(argv) == 1: url = input('> ')
+    if len(argv) == 1: url = input('YouTube video URL:> ')
     else: url = argv[1]
     video = yt(url)
     video.register_on_progress_callback(progreso)
@@ -90,4 +91,4 @@ def main():
 
     split(fileName,paresTiempoCancion,duracion)
 
-main()
+# main()
