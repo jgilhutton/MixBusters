@@ -91,4 +91,4 @@ def main():
 
     split(fileName,paresTiempoCancion,duracion)
 
-# main()
+main()
