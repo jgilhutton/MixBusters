@@ -68,7 +68,7 @@ def getPares(descripcion):
     return [[x.strip() for x in [i,j]] for i,j in paresTiempoCancion]
 
 def main():
-    if len argv == 1: url = input('> ')
+    if len(argv) == 1: url = input('> ')
     else: url = argv[1]
     video = yt(url)
     video.register_on_progress_callback(progreso)
