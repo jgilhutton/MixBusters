@@ -2,6 +2,7 @@ from pytube import YouTube as yt
 import subprocess
 from re import findall,search
 from os import mkdir,remove
+from sys import argv
 
 nopeChars = {'\\':'~','/':'~',':':';','*':'#','?':'¿','"':"``",'<':'(','>':')'}
 
@@ -67,7 +68,8 @@ def getPares(descripcion):
     return [[x.strip() for x in [i,j]] for i,j in paresTiempoCancion]
 
 def main():
-    url = input('> ')
+    if len argv == 1: url = input('> ')
+    else: url = argv[1]
     video = yt(url)
     video.register_on_progress_callback(progreso)
 
@@ -88,4 +90,4 @@ def main():
 
     split(fileName,paresTiempoCancion,duracion)
 
-# main()
+main()
