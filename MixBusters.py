@@ -1,6 +1,6 @@
 from pytube import YouTube as yt
 import subprocess
-from re import findall,search
+from re import findall,search,sub
 from os import mkdir,remove
 from sys import argv
 
@@ -62,6 +62,7 @@ def split(inputFileName,paresTiempoCancion,duracion):
         print('OK')
 
 def getPares(descripcion):
+    descripcion = sub('http[s]?://\S+','',descripcion)
     paresTiempoCancion = [list(filter(lambda a: a,x)) for x in findall('(?s)(?:\n\d+[\*:#\.)-_]\s)(?:(.*?)((?:\d{1,2}:)?\d{1,2}:\d{1,2})(?:\s*)(?=\n))|(?:((?:\d{1,2}:)?\d{1,2}:\d{1,2})(.*?(?=\n)))',descripcion)]
     #'(?s)(?:(.+?))(?:(?:[\(\[\s]+?)((?:\d{1,2}:)?\d{1,2}:\d{1,2})(?:.+?\d{1,2}:\d{1,2}.+?\n))'
     if not paresTiempoCancion: salir('Mmmm... no hay tracklist en la descripcion')
